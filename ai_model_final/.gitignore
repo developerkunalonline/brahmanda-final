@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+artifacts/*.pkl
+artifacts/*.joblib
+.env
+*.log
+.DS_Store

@@ -1,0 +1,241 @@
+/* src/index.css */
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    /* Deep Space Blue */
+    --foreground: 210 40% 98%;
+
+    /* Glass Effect Colors */
+    --glass-bg: 220 40% 15% / 0.5;
+    --glass-border: 220 40% 25% / 0.8;
+    --glass-highlight: 210 40% 98% / 0.1;
+
+    --card: 224 71% 4%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 190 95% 65%;
+    /* Cyan */
+    --primary-foreground: 224 71% 4%;
+
+    --secondary: 260 80% 60%;
+    /* Purple */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 40% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 220 40% 20% / 0.7;
+    --accent-foreground: 190 95% 65%;
+
+    --destructive: 0 84% 60%;
+    /* Red for errors */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 190 95% 65%;
+    /* Cyan */
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-image:
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.1), transparent 30%),
+      radial-gradient(circle at 75% 75%, hsl(var(--secondary) / 0.1), transparent 30%);
+  }
+}
+
+@layer components {
+  .glass-effect {
+    background-color: hsl(var(--glass-bg));
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    /* rounded-2xl */
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow:
+      0 0 0 1px hsl(var(--glass-highlight)) inset,
+      0 4px 20px 0 hsl(var(--background) / 0.5);
+  }
+}
+
+@layer components {
+
+  /* HUD-style corner brackets for cards and sections */
+  .hud-corners {
+    position: relative;
+  }
+
+  .hud-corners::before,
+  .hud-corners::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: hsl(var(--primary) / 0.4);
+    transition: border-color 0.3s ease;
+  }
+
+  .hud-corners:hover::before,
+  .hud-corners:hover::after {
+    border-color: hsl(var(--primary));
+  }
+
+  .hud-corners::before {
+    top: -8px;
+    left: -8px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 8px;
+  }
+
+  .hud-corners::after {
+    bottom: -8px;
+    right: -8px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    border-bottom-right-radius: 8px;
+  }
+
+  /* A subtle scanline animation for that "active screen" feel */
+  .scanline-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        hsl(var(--primary) / 0.05) 50%,
+        transparent 100%);
+    animation: scan 8s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Custom Tailwind utility for text shadow glow */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 8px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
+  }
+}
+
+@keyframes text-glitch {
+  0% {
+    text-shadow: 0.05em 0 0 hsl(var(--secondary) / 0.7), -0.05em 0 0 hsl(var(--primary) / 0.7);
+  }
+
+  14% {
+    text-shadow: 0.05em 0 0 hsl(var(--secondary) / 0.7), -0.05em 0 0 hsl(var(--primary) / 0.7);
+  }
+
+  15% {
+    text-shadow: -0.05em -0.025em 0 hsl(var(--secondary) / 0.7), 0.025em 0.025em 0 hsl(var(--primary) / 0.7);
+  }
+
+  19% {
+    text-shadow: -0.05em -0.025em 0 hsl(var(--secondary) / 0.7), 0.025em 0.025em 0 hsl(var(--primary) / 0.7);
+  }
+
+  20% {
+    text-shadow: none;
+  }
+
+  100% {
+    text-shadow: none;
+  }
+}
+
+.glitch-effect {
+  animation: text-glitch 2.5s infinite;
+}
+
+@layer base {
+
+  /* Keyframes for the slow background pan */
+  @keyframes background-pan {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@layer components {
+
+  /* Class to apply the background pan animation */
+  .animated-bg {
+    background-size: 150% 150%;
+    /* Zoom in slightly to allow panning */
+    animation: background-pan 60s ease-in-out infinite;
+  }
+
+  /* Animated underline for focused inputs */
+  .input-underline-effect {
+    position: relative;
+    background-color: transparent !important;
+  }
+
+  .input-underline-effect::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: hsl(var(--primary) / 0.3);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+  }
+
+  .input-underline-effect:focus-within::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+@layer base {
+  @keyframes radar-ping {
+    0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+    70% { box-shadow: 0 0 0 20px hsl(var(--primary) / 0); }
+    100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
+  }
+}

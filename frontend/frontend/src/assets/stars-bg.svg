@@ -1,0 +1,21 @@
+<!-- public/stars-bg.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <circle id="a" cx="400" cy="400" r="1.5" fill="#fff"/>
+  </defs>
+  <rect width="100%" height="100%" fill="transparent"/>
+  <use href="#a" x="100" y="100" opacity="0.8"/>
+  <use href="#a" x="250" y="50" opacity="0.6"/>
+  <use href="#a" x="600" y="150" opacity="0.9"/>
+  <use href="#a" x="700" y="300" opacity="0.7"/>
+  <use href="#a" x="150" y="500" opacity="0.5"/>
+  <use href="#a" x="450" y="650" opacity="1"/>
+  <use href="#a" x="50" y="750" opacity="0.8"/>
+  <use href="#a" x="750" y="50" opacity="0.6"/>
+  <use href="#a" x="300" y="300" opacity="0.9"/>
+  <use href="#a" x="550" y="450" opacity="0.7"/>
+  <use href="#a" x="200" y="700" opacity="0.5"/>
+  <use href="#a" x="650" y="50" opacity="1"/>
+  <use href="#a" x="750" y="750" opacity="0.8"/>
+  <use href="#a" x="50" y="250" opacity="0.6"/>
+</svg>
